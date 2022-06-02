@@ -39,15 +39,25 @@ final class ViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.navigationBar.topItem?.title = "Reminders"
-        navigationController?.navigationBar.titleTextAttributes = [ .font: UIFont.monospacedSystemFont(ofSize: 16, weight: .semibold)]
+        navigationController?.navigationBar.titleTextAttributes = [ .font: UIFont.monospacedSystemFont(ofSize: 16, weight: .heavy)]
+        setupNavigationBarTitle()
         navigationController?.navigationBar.topItem?.rightBarButtonItem = rightBarButtonItem
-        navigationController?.navigationBar.backgroundColor = .clear
+        navigationController?.navigationBar.backgroundColor = .vistaraYellow
         navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
+    private func setupNavigationBarTitle() {
+        let attrs = [
+            NSAttributedString.Key.foregroundColor: UIColor.vistaraPurple
+        ]
+        navigationController?.navigationBar.largeTitleTextAttributes = attrs
     }
     
     /// Create a table View
     lazy var tableView: UITableView = {
         let tableView = UITableView()
+        tableView.rowHeight = 48
+        tableView.backgroundColor = .vistaraPurple
         tableView.dataSource = self
         tableView.delegate = self
         return tableView
@@ -55,10 +65,11 @@ final class ViewController: UIViewController {
     
     /// Create a RightBarButtonItem
     lazy var rightBarButtonItem: UIBarButtonItem = {
-        UIBarButtonItem(image: UIImage(systemName: "plus.circle"),
+       let barButton =  UIBarButtonItem(image: UIImage(systemName: "plus.circle")?.withTintColor(.black, renderingMode: .alwaysOriginal),
                         style: .plain,
                         target: self,
                         action: #selector(tapActionForRightBarButton))
+        return barButton
     }()
     
     
@@ -105,15 +116,15 @@ final class ViewController: UIViewController {
     
     /// SetupView
     func setupView() {
-        view.backgroundColor = .white
+        view.backgroundColor = .vistaraPurple
         view.addSubview(tableView)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(ItemTableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 25),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25)
         ])
     }
@@ -123,13 +134,13 @@ final class ViewController: UIViewController {
 /// MARK: Table View DataSource methods
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        reminders?.count ?? 1
+         1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        let text = reminders?[indexPath.row].item
-        cell.textLabel?.text = text
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ItemTableViewCell
+        let text = reminders?[indexPath.section].item
+        cell.configureCell(itemText: text ?? "")
         return cell
     }
 }
@@ -141,7 +152,7 @@ extension ViewController: UITableViewDelegate {
         let contextActions = UIContextualAction(style: .destructive,
                                                 title: "Delete") { [weak self] action, view, _ in
             // Item To Remove
-            let itemToRemove = self?.reminders?[indexPath.row]
+            let itemToRemove = self?.reminders?[indexPath.section]
             
             // Remove Item using Context
             self?.context?.delete(itemToRemove!)
@@ -158,6 +169,27 @@ extension ViewController: UITableViewDelegate {
 
         return UISwipeActionsConfiguration(actions: [contextActions])
     }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        reminders?.count ?? 1
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        nil
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        .leastNormalMagnitude
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        .leastNormalMagnitude
+    }
+
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        nil
+    }
+    
 }
 
 
