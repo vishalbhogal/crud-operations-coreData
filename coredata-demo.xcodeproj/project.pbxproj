@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D048B3B52847EF0700AB96DF /* Reminders+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D048B3B32847EF0700AB96DF /* Reminders+CoreDataClass.swift */; };
-		D048B3B62847EF0700AB96DF /* Reminders+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D048B3B42847EF0700AB96DF /* Reminders+CoreDataProperties.swift */; };
+		D04EA054284CD6AA005EC522 /* Reminders+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04EA050284CD6AA005EC522 /* Reminders+CoreDataClass.swift */; };
+		D04EA055284CD6AA005EC522 /* Reminders+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04EA051284CD6AA005EC522 /* Reminders+CoreDataProperties.swift */; };
+		D04EA056284CD6AA005EC522 /* Items+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04EA052284CD6AA005EC522 /* Items+CoreDataClass.swift */; };
+		D04EA057284CD6AA005EC522 /* Items+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04EA053284CD6AA005EC522 /* Items+CoreDataProperties.swift */; };
 		D0B638B528492037002C2D5A /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B638B428492037002C2D5A /* ItemTableViewCell.swift */; };
 		D0B638B828492284002C2D5A /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B638B728492284002C2D5A /* UIColor+Extensions.swift */; };
 		D0FB40D528469F11004FDA17 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FB40D428469F11004FDA17 /* AppDelegate.swift */; };
@@ -39,8 +41,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D048B3B32847EF0700AB96DF /* Reminders+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reminders+CoreDataClass.swift"; sourceTree = "<group>"; };
-		D048B3B42847EF0700AB96DF /* Reminders+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reminders+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D04EA050284CD6AA005EC522 /* Reminders+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reminders+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D04EA051284CD6AA005EC522 /* Reminders+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reminders+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D04EA052284CD6AA005EC522 /* Items+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Items+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D04EA053284CD6AA005EC522 /* Items+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Items+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D0B638B428492037002C2D5A /* ItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
 		D0B638B728492284002C2D5A /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		D0FB40D128469F11004FDA17 /* coredata-demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "coredata-demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -154,8 +158,10 @@
 		D0FB410B2846A411004FDA17 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D048B3B32847EF0700AB96DF /* Reminders+CoreDataClass.swift */,
-				D048B3B42847EF0700AB96DF /* Reminders+CoreDataProperties.swift */,
+				D04EA050284CD6AA005EC522 /* Reminders+CoreDataClass.swift */,
+				D04EA051284CD6AA005EC522 /* Reminders+CoreDataProperties.swift */,
+				D04EA052284CD6AA005EC522 /* Items+CoreDataClass.swift */,
+				D04EA053284CD6AA005EC522 /* Items+CoreDataProperties.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -291,12 +297,14 @@
 			files = (
 				D0FB40D928469F11004FDA17 /* ViewController.swift in Sources */,
 				D0FB40DF28469F11004FDA17 /* coredata_demo.xcdatamodeld in Sources */,
-				D048B3B52847EF0700AB96DF /* Reminders+CoreDataClass.swift in Sources */,
+				D04EA057284CD6AA005EC522 /* Items+CoreDataProperties.swift in Sources */,
+				D04EA054284CD6AA005EC522 /* Reminders+CoreDataClass.swift in Sources */,
 				D0B638B828492284002C2D5A /* UIColor+Extensions.swift in Sources */,
 				D0FB40D528469F11004FDA17 /* AppDelegate.swift in Sources */,
+				D04EA056284CD6AA005EC522 /* Items+CoreDataClass.swift in Sources */,
+				D04EA055284CD6AA005EC522 /* Reminders+CoreDataProperties.swift in Sources */,
 				D0FB40D728469F11004FDA17 /* SceneDelegate.swift in Sources */,
 				D0B638B528492037002C2D5A /* ItemTableViewCell.swift in Sources */,
-				D048B3B62847EF0700AB96DF /* Reminders+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
