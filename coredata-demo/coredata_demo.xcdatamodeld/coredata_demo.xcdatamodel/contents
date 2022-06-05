@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21D62" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Items" representedClassName="Items" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="text" optional="YES" attributeType="String"/>
+        <relationship name="reminder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Reminders" inverseName="items" inverseEntity="Reminders"/>
+    </entity>
     <entity name="Reminders" representedClassName=".Reminders" syncable="YES">
-        <attribute name="item" optional="YES" attributeType="String"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Items" inverseName="reminder" inverseEntity="Items"/>
     </entity>
     <elements>
+        <element name="Items" positionX="-63" positionY="-9" width="128" height="74"/>
         <element name="Reminders" positionX="-63" positionY="-18" width="128" height="44"/>
     </elements>
 </model>

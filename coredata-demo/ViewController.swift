@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 final class ViewController: UIViewController {
     
@@ -13,7 +14,7 @@ final class ViewController: UIViewController {
     let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
     
     /// Data for TableView
-    var reminders: [Reminders]?
+    var items: [Items]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +27,15 @@ final class ViewController: UIViewController {
     // MARK: Update Data in Container
     private func fetchData() {
         do {
-            reminders = try context?.fetch(Reminders.fetchRequest())
+            let fetchRequest = NSFetchRequest<Items>(entityName: "Items")
+           
+            // Sort data based on date Modified
+            let predicate = NSSortDescriptor(key: "date", ascending: true)
+            fetchRequest.sortDescriptors = [predicate]
+            
+            items = try context?.fetch(Items.fetchRequest())
+            
+            //Reload Table View
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -89,7 +98,16 @@ final class ViewController: UIViewController {
             
             //Create A Reminders Entity
             let reminders = Reminders(context: self.context!)
-            reminders.item = textField?.text
+            
+            //Create a Item Entity
+            
+            let item = Items(context: self.context!)
+            item.text = textField?.text
+            item.date = Date()
+            
+            // Save data into Reminders
+            
+            reminders.addToItems(item)
             
             // Save the data
             do {
@@ -97,7 +115,6 @@ final class ViewController: UIViewController {
             } catch {
                 
             }
-           
             // Reload the View
             self.fetchData()
         }
@@ -139,7 +156,7 @@ extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ItemTableViewCell
-        let text = reminders?[indexPath.section].item
+        let text = items?[indexPath.section].text
         cell.configureCell(itemText: text ?? "")
         return cell
     }
@@ -152,7 +169,8 @@ extension ViewController: UITableViewDelegate {
         let contextActions = UIContextualAction(style: .destructive,
                                                 title: "Delete") { [weak self] action, view, _ in
             // Item To Remove
-            let itemToRemove = self?.reminders?[indexPath.section]
+            let itemToRemove = self?.items?[indexPath.section]
+
             
             // Remove Item using Context
             self?.context?.delete(itemToRemove!)
@@ -171,7 +189,7 @@ extension ViewController: UITableViewDelegate {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        reminders?.count ?? 1
+        items?.count ?? 1
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -191,6 +209,3 @@ extension ViewController: UITableViewDelegate {
     }
     
 }
-
-
-
